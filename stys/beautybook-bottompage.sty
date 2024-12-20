@@ -1,0 +1,162 @@
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{stys/beautybook-bottompage}[2023/10/15,v2.0]
+\usepackage[ISBN=978-80-85955-35-4,SC0]{ean13isbn}
+\makeatletter
+%%----------------------------------封面信息定义--------------------------------------------------------%%
+\newcommand\summary[1]{\def\@summary{#1}}
+\newcommand\ISBNcode[1]{\def\@ISBNcode{#1}}
+%%----------------------------------封面信息定义--------------------------------------------------------%%
+% /* -------------------------------------------------------------------------- */
+% /*                  Define the layers to be used in document.                 */
+% /* -------------------------------------------------------------------------- */
+\pgfdeclarelayer{background} %背景%底层
+\pgfdeclarelayer{foreground} %上层
+\pgfdeclarelayer{top} %顶部
+\pgfdeclarelayer{bottom} %底部
+\pgfsetlayers{bottom,background,main,foreground,top}
+% /* -------------------------------------------------------------------------- */
+% /*                  Define the layers to be used in document.                 */
+% /* -------------------------------------------------------------------------- */
+% Colors
+\definecolor{coverbgcolor}{HTML}{e0e0e0}
+\definecolor{coverfgcolor}{HTML}{1f3134}
+\definecolor{coverbar}{HTML}{7c9092}
+\definecolor{bottomcolor}{HTML}{2c4f54}
+\definecolor{gold}{RGB}{239,173,91}
+\definecolor{silver}{RGB}{192,192,192}
+%
+\newcommand\makebottomcover{
+    %% Use the Tikz library positioning and clear the page header and footer
+    \newpage
+    \thispagestyle{empty}
+    \phantom{s}
+    \clearpage
+    \newpage
+    \usetikzlibrary{positioning}
+    \thispagestyle{empty}
+    \begin{tikzpicture}[remember picture,overlay]
+        \begin{pgfonlayer}{bottom}
+          \fill[coverfgcolor]         
+          (current page.north west) rectangle (current page.south east);% 填充封面背景颜色 (coverbgcolor)
+    \node[opacity=0.85,inner sep=0pt] at (current
+            page.center){
+            \begin{tikzpicture}
+      \foreach \i in {0,1,2,...,11}{
+      \begin{scope}[rotate=\i*30]
+    
+      \draw[bottomcolor,fill=bottomcolor](0,0) to (8,0) to [bend right=45]  (30:8cm) -- cycle;
+    
+      \foreach \j in {0,2,4,...,28} {
+        \draw[thin, gold] (0,0) -- (\j:\j*0.03cm+7cm);
+      }
+    
+      \draw[line width=10mm, bottomcolor] (7.5,0) to [bend right=45] (30:7.5cm);
+    
+      \draw[fill=bottomcolor, bottomcolor, ultra thick] (0,0) -- (2.2,0) to [bend right=60] (30:2.2cm) -- cycle;
+    \end{scope}
+    }
+
+    \foreach \i in {0,1,2,...,11}{
+      \begin{scope}[rotate=\i*30]
+    
+        \foreach \k in {0.4,0.6,...,1.6} {
+        \draw[thick, silver] (\k,0) to [bend right=60] (30:\k cm);
+        }
+    
+        \draw[ultra thick, gold] (2,0) to [bend right=60] (30:2cm);
+        \draw[ultra thick, gold] (2.1,0) to [bend right=60] (30:2.1cm);
+        \draw[ultra thick, gold] (2.2,0) to [bend right=60] (30:2.2cm);
+    
+        \draw[gold, decorate, decoration={shape backgrounds,shape=circle,shape size=0.5mm,shape sep=1mm}] (1.7,0) to [bend right=60] (30:1.7cm);
+        \draw[gold, decorate, decoration={shape backgrounds,shape=circle,shape size=0.5mm,shape sep=1mm}] (1.8,0) to [bend right=60] (30:1.8cm);
+    
+        \draw[very thick, silver] (0,0) --(2.2,0);
+    
+        \draw[line width=3mm, gold] (7,0) to [bend right=45] (30:7cm);
+    
+        \draw[gold, thick, decorate, decoration={shape backgrounds,shape=circle,shape size=1.8mm,shape sep=3.05mm}] (7.4,0) to [bend right=45] (30:7.4cm);
+    
+        \draw[ultra thick, silver, fill=teal] (2.2,0) .. controls (3,-0.2) and (5.8,3.1) .. (6,0);
+        \draw[ultra thick, silver, fill=teal] (2.2,0) .. controls (3,0.2) and (5.8,-3.1) .. (6,0);
+    
+        \draw[ultra thick, silver] (4,0.92) .. controls (4.5,1) and (4.7,0) .. (5,0);
+        \draw[ultra thick, silver] (4,-0.92) .. controls (4.5,-1) and (4.7,0) .. (5,0);
+    
+        \draw[ultra thick, silver] (2.4,0) .. controls (4.5,1) and (4.5,0) .. (2.4,0);
+        \draw[ultra thick, silver] (2.4,0) .. controls (4.5,-1) and (4.5,0) .. (2.4,0);
+    
+        \draw[very thick, gold] (3.8,0) circle (0.2cm);
+        \draw[very thick, gold] (4.15,0) circle (0.15cm);
+        \draw[very thick, gold] (4.4,0) circle (0.1cm);
+        \draw[very thick, gold] (4.55,0) circle (0.05cm);
+    
+    
+        \draw[very thick, silver] (5.5,0) circle (0.5cm);
+        \filldraw[silver, inner color=teal,outer color=silver] (5.5,0) circle (0.5cm);
+    
+        \draw[very thick, silver] (5,0.65) circle (0.3cm);
+        \draw[very thick, silver] (5,-0.65) circle (0.3cm);
+        \draw[very thick, silver] (4.55,0.8) circle (0.15cm);
+        \draw[very thick, silver] (4.55,-0.8) circle (0.15cm);
+    
+        \draw[ultra thick, silver, fill=teal] (6,0) .. controls (6.4,1.2) and (6.9,0) .. (7,0);
+        \draw[ultra thick, silver, fill=teal] (6,0) .. controls (6.4,-1.2) and (6.9,0) .. (7,0);
+    
+        \foreach \j in {0,0.2,0.4,0.6,0.8,1}{
+        \draw[very thick, silver, dotted] (6,0) .. controls (6.4,1-\j) and (6.9,0) .. (7,0);
+        \draw[very thick, silver, dotted] (6,0) .. controls (6.4,-1+\j) and (6.9,0) .. (7,0);
+        }
+      \end{scope}
+    }
+    \end{tikzpicture}
+            };
+    \path[fill=bottomcolor!50] 
+    (current page.north east) coordinate (E) --++(-.6\paperwidth,0) coordinate (B) [bend right=30] to ([yshift=-.2\paperheight]E)--cycle;
+    \path[fill=bottomcolor!75,opacity=0.8] 
+    (current page.north east) coordinate (E) --++(-.6\paperwidth,0) coordinate (B) [bend right=30] to ([yshift=-.25\paperheight]E)--cycle;
+        \end{pgfonlayer}
+        \ifdefvoid{\@summary}{}{
+            \begin{pgfonlayer}{foreground}
+        \fill[color=bottomcolor!80,opacity=.6]node[append after command={
+        ([yshift=0.5cm]bottominfo.north west) rectangle ([yshift=-0.5cm]bottominfo.south east)},font=\large\bfseries,text=white,minimum width=\paperwidth,opacity=1] (bottominfo) at (current page.center) {\begin{varwidth}{\linewidth}\baselineskip=3ex\@summary\end{varwidth}};
+        \end{pgfonlayer}
+        }
+        \node[text=white,left] at ([xshift=0cm,yshift=-.25\covershift]current page.north east) {%
+        \parbox{.6\linewidth}{\baselineskip=22.5pt
+        \raggedright
+        \sc\fontsize{20}{23}\selectfont\@bookseries}
+        }; %系列丛书名称
+        \node[right,text=white,font=\rmfamily\Large,] at
+        ([shift={(-.5cm,1.5cm)}]current page.south west)  %
+    {\raisebox{-1.1cm}{\includegraphics[width=0.2\linewidth]{\@presslogo}}\hspace*{-3.5ex}\begin{varwidth}{.4\textwidth}\tikz\draw[white,line width=1.25pt] (0,0)--++(0,1cm);\,\raisebox{.25cm}{\@pressname} \end{varwidth}};%
+    \ifdefvoid{\@ISBNcode}{}{
+        \node[scale=1.5] (isbn) at ([shift={(-1.85\outermarginwidth,.5\covershift)}]current page.south east) {\@ISBNcode};%
+        \begin{pgfonlayer}{bottom}
+            \fill[white]  (isbn.north west) rectangle (isbn.south east);%
+        \end{pgfonlayer}
+    }
+\end{tikzpicture}%
+}
+\makeatother
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

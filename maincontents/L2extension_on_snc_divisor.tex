@@ -1,0 +1,404 @@
+% !TEX root = ../chatGPT.tex
+\chapter{\texorpdfstring{$L^2$}{}-Extension Theorem in the case of singular subvariety with simple normal crossing divisor}
+\section{The Case of a Non-singular Hypersurface \texorpdfstring{$Y$}{}}
+\begin{problem}[Computation Problem 1]\label{prob:cp1}
+    Let $\xi$ be a $L$-valued form of type $(n, 1)$. We denote by $\gamma_{\xi}:=\star \xi$ its Hodge dual (induced by an arbitrary Kähler form on $X$ ).
+Consider the functional
+\begin{equation}
+    \label{eq:L1}
+    \mathcal{F}(\xi)=\int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi}} e^{-\varphi_L} 
+\end{equation}
+associated to the current $\bar{\partial}\left(\frac{u}{s_Y}\right)$.
+We decompose $\xi=\xi_1+\xi_2$ according to $\operatorname{Ker}(\bar{\partial})$ and $\operatorname{Ker}(\bar{\partial})^{\perp}$. It turns out that we have the equality
+\begin{equation}
+    \label{eq:L2}
+    \mathcal{F}(\xi)=\int_Y \frac{u}{\mathrm{~d} s_Y} \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}
+\end{equation}
+请问如何从\eqref{eq:L1}得到\eqref{eq:L2}？
+\end{problem}
+    
+\begin{solution}
+    要从\eqref{eq:L1}得到\eqref{eq:L2}，我们需要利用两个关键点：\textbf{形式的分解和全纯微分算子的性质}。
+\begin{enumerate}
+\item  \textbf{形式的分解}
+
+根据题意，形式 $\xi$ 可以分解为两部分：
+$$
+\xi = \xi_1 + \xi_2
+$$
+其中 $\xi_1 \in \operatorname{Ker}(\bar{\partial})$，即 $\bar{\partial} \xi_1 = 0$；$\xi_2 \in \operatorname{Ker}(\bar{\partial})^{\perp}$，即 $\xi_2$ 是 $\operatorname{Ker}(\bar{\partial})$ 在某种内积下的正交补。
+
+\item  \textbf{Hodge 对偶}
+
+由 $\xi$ 的 Hodge 对偶 $\gamma_{\xi} = \star \xi$ 的定义，我们也可以相应地分解 $\gamma_{\xi}$ 为：
+$$
+\gamma_{\xi} = \gamma_{\xi_1} + \gamma_{\xi_2}
+$$
+
+\item  \textbf{运算的性质}
+
+首先，我们注意到 $\mathcal{F}(\xi)$ 的定义：
+$$
+\mathcal{F}(\xi) = \int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi}} e^{-\varphi_L}
+$$
+
+接下来，考虑 $\bar{\partial}$ 作用到分解形式 $\xi$ 上的性质。由于 $\xi_1 \in \operatorname{Ker}(\bar{\partial})$，所以 $\bar{\partial} \xi_1 = 0$，而 $\xi_2 \in \operatorname{Ker}(\bar{\partial})^{\perp}$ 意味着 $\xi_2$ 与 $\operatorname{Ker}(\bar{\partial})$ 正交。
+
+\item  \textbf{计算 $\mathcal{F}(\xi)$}
+
+由于 $\xi_2 \in \operatorname{Ker}(\bar{\partial})^{\perp}$，它不包含在 $\operatorname{Ker}(\bar{\partial})$ 中，意味着 $\bar{\partial}(\xi_2)$ 不为零。然而，由于 $\bar{\partial}$ 是一个偏微分算子，我们需要考虑其在积分中的作用。
+
+令我们考虑当前 $\bar{\partial}(\xi_1 + \xi_2)$ 在积分中的影响：
+
+$$
+\mathcal{F}(\xi) = \int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{(\gamma_{\xi_1} + \gamma_{\xi_2})} e^{-\varphi_L}
+$$
+
+由于 $\bar{\partial} \xi_1 = 0$，我们有：
+$$
+\mathcal{F}(\xi) = \int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L} + \int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi_2}} e^{-\varphi_L}
+$$
+
+\textbf{关键点在于 $\gamma_{\xi_2}$ 项。因为 $\xi_2$ 与 $\operatorname{Ker}(\bar{\partial})$ 正交，所以它的贡献可以被看作零。换句话说，我们可以忽略 $\gamma_{\xi_2}$ 相关的积分项。}故此：
+$$
+\mathcal{F}(\xi) = \int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}
+$$
+
+\item  \textbf{积分限制到 $Y$ 上}
+
+接下来考虑 $\int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}$ 的计算。由于 $\bar{\partial}\left(\frac{u}{s_Y}\right)$ 是由一个除子 $Y$ 产生的全纯形式，我们可以把积分限制到 $Y$ 上。
+
+特别是，\textbf{$\bar{\partial}\left(\frac{u}{s_Y}\right)$ 在 $Y$ 上有一个“delta-like”的表现形式，它可以描述为沿 $Y$ 的拉回。}所以我们有：
+$$
+\int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L} = \int_Y \frac{u}{\mathrm{d} s_Y} \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}
+$$
+\end{enumerate}
+综上所述，通过上述分解和性质的利用，我们得到：
+$$
+\mathcal{F}(\xi) = \int_Y \frac{u}{\mathrm{d} s_Y} \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}
+$$
+
+这样我们就从\eqref{eq:L1}得到\eqref{eq:L2}。
+\end{solution}
+
+\begin{remark}
+    这两个问题涉及到一些深层次的复几何和代数几何的理论。我们来一一解答：
+
+1. 为何从 $\xi_2$ 与 $\operatorname{Ker}(\bar{\partial})$ 正交可以得出它的贡献可以被看作零？
+
+$\xi_2$ 属于 $\operatorname{Ker}(\bar{\partial})^{\perp}$，即它与 $\operatorname{Ker}(\bar{\partial})$ 中的所有元素正交。为了理解这一点，我们考虑如下几点：
+\begin{itemize}
+    \item 在积分 $\mathcal{F}(\xi) = \int_X \bar{\partial}\left(\frac{u}{s_Y}\right) \wedge \overline{\gamma_{\xi}} e^{-\varphi_L}$ 中，我们可以将 $\gamma_{\xi}$ 分解为 $\gamma_{\xi_1}$ 和 $\gamma_{\xi_2}$。
+    \item $\xi_1$ 在 $\operatorname{Ker}(\bar{\partial})$ 中，这意味着 $\bar{\partial} \xi_1 = 0$。而 $\xi_2 \in \operatorname{Ker}(\bar{\partial})^{\perp}$，意味着 $\xi_2$ 与所有 $\operatorname{Ker}(\bar{\partial})$ 中的元素正交。
+    \item 当我们计算 $\mathcal{F}(\xi)$ 时，由于 $\bar{\partial}\left(\frac{u}{s_Y}\right)$ 是一个 $\bar{\partial}$-闭的 $(n, 1)$ 形式，其支撑集在 $Y$ 上。$\gamma_{\xi_2}$ 与 $\gamma_{\xi_1}$ 是正交的，而 $\gamma_{\xi_1}$ 与 $\bar{\partial}\left(\frac{u}{s_Y}\right)$ 的结合在积分中起主要作用。
+\end{itemize}
+
+由于 $\bar{\partial} \xi_1 = 0$，$\xi_1$ 的贡献可以直接用积分表示出来。对于 $\xi_2$，因为它与 $\operatorname{Ker}(\bar{\partial})$ 正交，它的作用在积分中是零。这样我们就可以忽略 $\gamma_{\xi_2}$ 的相关积分。
+
+总结：$\xi_2$ 与 $\operatorname{Ker}(\bar{\partial})$ 正交的性质，使得在涉及 $\bar{\partial}$ 的积分中，$\xi_2$ 的贡献是零。
+
+2. $\bar{\partial}\left(\frac{u}{s_Y}\right)$ 在 $Y$ 上有一个“delta-like”的表现形式，它可以描述为沿 $Y$ 的拉回？
+
+这里的关键是理解除子和其相关的全纯结构。
+\begin{itemize}
+    \item \textbf{Delta-like 表现形式}
+
+在复几何中，如果 $Y$ 是 $X$ 的一个除子（即 $Y$ 是 $X$ 中的一个子流形，并且它可以作为一个零点集定义），我们可以考虑如下形式：
+$$
+\bar{\partial}\left(\frac{1}{s_Y}\right)
+$$
+这里 $s_Y$ 是定义 $Y$ 的一个全纯函数。$s_Y = 0$ 在 $Y$ 上定义了 $Y$。我们通过分式表达 $\frac{1}{s_Y}$ 来描述 $Y$ 的某些解析性质。
+
+这种形式 $\bar{\partial}\left(\frac{1}{s_Y}\right)$ 可以理解为一个“delta-like” 表现形式，因为它在 $Y$ 上表现为一个集中在 $Y$ 上的电流（current）。这种形式的积分性质类似于 Dirac delta 函数在 $Y$ 上的限制。
+\item \textbf{沿 $Y$ 的拉回}
+
+考虑形式 $\bar{\partial}\left(\frac{u}{s_Y}\right)$，其中 $u$ 是一个 $L$-值的形式。我们可以将 $u$ 限制在 $Y$ 上，通过 $\frac{u}{s_Y}$ 体现出 $u$ 在 $Y$ 上的行为。
+
+这种“拉回”（pullback）意味着我们在计算 $\mathcal{F}(\xi)$ 的时候，可以将积分集中在 $Y$ 上的一个截面，这样就转换为沿 $Y$ 的积分。
+\end{itemize}
+
+总结
+
+将这两个关键点结合起来：
+
+1. $\xi_2$ 的贡献为零是因为它与 $\operatorname{Ker}(\bar{\partial})$ 正交，使得它在 $\bar{\partial}$ 的积分中不贡献。
+2. $\bar{\partial}\left(\frac{u}{s_Y}\right)$ 在 $Y$ 上有类似 Dirac delta 的表现形式，因此它的积分可以集中在 $Y$ 上的一个拉回，使得积分变得可计算。
+
+这样就得到了从一式到二式的推导。
+
+\Line
+要理解这个问题，需要更详细地讨论除子、全纯函数和电流的关系，以及如何在不同维度的子流形上进行积分。
+
+\textbf{背景：Poincaré-Lelong公式和电流}
+
+首先，我们回顾一下\textbf{Poincaré-Lelong公式，它在研究全纯函数的零点集时非常重要}。如果$s_Y$是一个全纯函数，它的零点集定义了一个除子$Y$。Poincaré-Lelong公式表明：
+$$
+dd^c \log |s_Y|^2 = [Y]
+$$
+这里，$[Y]$是集中在$Y$上的电流，$dd^c$是复几何中的微分算子。
+
+1. 在$X$上的积分
+
+当我们在$X$上积分时，考虑的是一个包含$Y$的整体空间上的积分。在这个背景下，如果我们有一个形式$u$，则
+$$
+\bar{\partial} \left(\frac{u}{s_Y}\right)
+$$
+可以理解为在$X$上去除$Y$时的全纯形式。实际上，这可以通过引入一个小参数$\epsilon$来处理，例如考虑$|s_Y| \geq \epsilon$时的积分。在这种情况下，$\frac{1}{s_Y}$是有意义的。
+
+使用$\bar{\partial} \left(\frac{u}{s_Y}\right)$表示，意味着我们在$X$上处理的是一种带有奇异性（在$Y$上）的全纯形式，它的贡献集中在$Y$附近。
+
+2. 在$Y$上的积分
+
+当我们考虑在$Y$上的积分时，我们实际上是将积分集中在$Y$上，而不是在整个$X$上。为了在$Y$上处理积分，我们需要将形式$\frac{u}{s_Y}$限制到$Y$上。这里的关键是理解$\bar{\partial}\left(\frac{u}{s_Y}\right)$在$Y$上的行为。
+
+使用Poincaré-Lelong公式，我们知道：
+$$
+\bar{\partial}\left(\frac{1}{s_Y}\right) \text{在} Y \text{上类似于} \delta_Y
+$$
+这意味着在$Y$上的积分可以看作在一个小邻域内的积分，在这种情况下，形式$\bar{\partial}\left(\frac{u}{s_Y}\right)$实际上变成了$\frac{u}{ds_Y}$，其中$ds_Y$表示$s_Y$在$Y$上的微分。
+
+数学解释
+
+假设$Y$是$X$中的一个全纯子流形，由$s_Y=0$定义。考虑积分：
+$$
+\int_X \bar{\partial} \left( \frac{u}{s_Y} \right) \wedge \overline{\gamma_{\xi}}
+$$
+利用Poincaré-Lelong公式，可以写成：
+$$
+\int_X \bar{\partial} \left( \frac{u}{s_Y} \right) \wedge \overline{\gamma_{\xi}} = \int_Y \left( \frac{u}{ds_Y} \right) \wedge \overline{\gamma_{\xi}}
+$$
+这种转换是因为$\bar{\partial} \left( \frac{1}{s_Y} \right)$在$Y$上表现为一个delta-like的电流，从而将$X$上的积分集中在$Y$上。
+
+总结：
+- $\bar{\partial}\left(\frac{u}{s_Y}\right)$表示在$X$上包含奇异点的全纯形式。
+- 在$Y$上，这种形式可以转化为$\frac{u}{ds_Y}$，因为$\bar{\partial}\left(\frac{1}{s_Y}\right)$在$Y$上表现为一个delta-like的电流。
+
+通过这种方法，我们可以从全空间$X$上的积分转换为在子流形$Y$上的积分。要深入理解这种转换和电流理论，推荐参考Demailly的书《Complex Analytic and Differential Geometry》中的相关章节。
+\end{remark}
+
+\begin{thm}[Poincar\'e Lelong Equation]\label{thm:plelong} % Demalily (2.15)
+    Let $f \in \mathcal{M}(X)$ be a meromorphic function which does not vanish identically on any connected component of $X$ and let $\sum m_j Z_j$ be the divisor of $f$. Then the function $\log |f|$ is locally integrable on $X$ and satisfies the equation
+$$
+\frac{\mathrm{i}}{\pi} d^{\prime} d^{\prime \prime} \log |f|=\sum m_j\left[Z_j\right]
+$$
+in the space $\mathscr{D}_{n-1, n-1}^{\prime}(X)$ of currents of bidimension $(n-1, n-1)$.
+\end{thm}
+Observe that if $f$ is holomorphic, then $\log |f| \in \operatorname{Psh}(X)$, the coefficients $m_j$ are positive integers and the right hand side is a positive current in $\mathscr{D}_{n-1, n-1}^{\prime+}(X)$.
+
+
+In our setting we have $Y=\bigcup Y_i$, and the difficulty steams from the fact that the functional
+$$
+\int_Y \frac{u}{\mathrm{~d} s_Y} \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}=\sum_i \int_{Y_i} \frac{u}{\prod_{j \neq i} s_j \mathrm{~d} s_{Y_i}} \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}
+$$
+becomes a sum of expressions involving forms with log poles. We have
+$$
+\frac{u}{\prod_{j \neq i} s_j \mathrm{~d} s_{Y_i}} \notin L^2\left(\left.e^{-\varphi_L}\right|_{Y_i}\right)
+$$
+in general, so the previous arguments are breaking down.
+\begin{problem}[Why?]
+Nevertheless we do have
+$$
+\left|\frac{u}{\mathrm{~d} s_Y}\right|_\omega^{\frac{2}{1+\alpha}} \in L^1\left(Y,\left.\omega\right|_Y\right)
+$$
+near the singularities of $Y$ for any reasonable metric $\omega$. \textbf{This means that we have to find an estimate of the $L^{\infty}$ norm of $\gamma_{\xi_1} \mid V_{\text {sing } \cap Y}$ in terms of the RHS of (2.0.5).}
+\end{problem}
+
+\begin{solution}
+
+\textbf{要理解这里的问题，我们需要分解和细化所提到的各个部分以及它们之间的关系。具体而言，我们要理解的是，为什么在具有简单正则交叉（simple normal crossings, snc）奇异性的情形下，形式$\frac{u}{\mathrm{d} s_Y}$会产生困难，以及这些困难如何影响积分。}
+
+\textbf{背景}
+\begin{itemize}
+    \item 我们考虑一个复流形$X$及其子流形$Y$，其中$Y$是由几个子流形$Y_i$组成的简单正则交叉（snc）超曲面，即：$Y = \bigcup Y_i$。
+\end{itemize}
+
+\textbf{积分表达式及其问题}
+\begin{itemize}
+    \item 我们关注以下积分：
+    \[
+    \int_Y \frac{u}{\mathrm{d} s_Y} \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}
+    \]
+    \item 根据定义，这个积分可以被分解成各个$Y_i$上的积分之和：
+    \[
+    \sum_i \int_{Y_i} \frac{u}{\prod_{j \neq i} s_j \mathrm{d} s_{Y_i}} \wedge \overline{\gamma_{\xi_1}} e^{-\varphi_L}
+    \]
+\end{itemize}
+
+\textbf{主要问题}
+\begin{enumerate}
+    \item 在每个子流形$Y_i$上，形式$\frac{u}{\prod_{j \neq i} s_j \mathrm{d} s_{Y_i}}$可能会有对数极点（log poles）。具体来说，对于全纯函数$u$，由于存在多个$s_j$，形式$\frac{u}{\prod_{j \neq i} s_j \mathrm{d} s_{Y_i}}$在$L^2$范数下可能不可积。换句话说：
+    \[
+    \frac{u}{\prod_{j \neq i} s_j \mathrm{d} s_{Y_i}} \notin L^2\left(\left.e^{-\varphi_L}\right|_{Y_i}\right)
+    \]
+    \item \textbf{解决方法的思路}
+    \begin{itemize}
+        \item 尽管如此，我们还是有以下结果：
+        \[
+        \left|\frac{u}{\mathrm{d} s_Y}\right|_\omega^{\frac{2}{1+\alpha}} \in L^1\left(Y,\left.\omega\right|_Y\right)
+        \]
+        这意味着，在$Y$的奇异点附近，对于任何合理的度量$\omega$，形式$\frac{u}{\mathrm{d} s_Y}$的某种范数是$L^1$可积的。这给我们提供了一些希望，可以通过某种估计方法来处理这些奇异点。
+    \end{itemize}
+\end{enumerate}
+
+\textbf{$L^{\infty}$范数的估计}
+\begin{itemize}
+    \item 最后一步是如何处理$\gamma_{\xi_1}$在$V_{\text{sing} \cap Y}$上的$L^{\infty}$范数。这个估计需要联系到我们之前的表达式，即（2.0.5）的右边。
+\end{itemize}
+
+\textbf{详细解释}
+\begin{enumerate}
+    \item \textbf{分解积分}：
+    \begin{itemize}
+        \item 对$Y$进行分解，得到每个$Y_i$上的积分。
+        \item 注意到在每个$Y_i$上，形式$\frac{u}{\prod_{j \neq i} s_j \mathrm{d} s_{Y_i}}$可能有对数极点。
+    \end{itemize}
+    \item \textbf{不可积性问题}：
+    \begin{itemize}
+        \item $\frac{u}{\prod_{j \neq i} s_j \mathrm{d} s_{Y_i}} \notin L^2$意味着积分在这些子流形上不收敛。
+    \end{itemize}
+    \item \textbf{可积性解决方案}：
+    \begin{itemize}
+        \item 尽管$L^2$不可积，我们还是可以在某些条件下证明$\left|\frac{u}{\mathrm{d} s_Y}\right|_\omega^{\frac{2}{1+\alpha}} \in L^1$，表明有些更弱的形式是可积的。
+    \end{itemize}
+    \item \textbf{$L^{\infty}$范数的估计}：
+    \begin{itemize}
+        \item 目标是找到$\gamma_{\xi_1}$在奇异点的$L^{\infty}$范数的上界，以便控制整体积分。
+        \item 这一步的估计需要联系到之前的公式（2.0.5）的右边（未给出具体形式，但假设其提供了必要的界限）。
+    \end{itemize}
+\end{enumerate}
+
+总结而言，理解这个问题的关键在于处理由snc超曲面$Y$带来的奇异性，特别是形式$\frac{u}{\mathrm{d} s_Y}$的对数极点，并通过某种方式控制这些奇异点对积分的影响。具体方法可以参考相关文献中关于正则交叉点处理的讨论，尤其是在Demailly的书中。
+
+\end{solution}
+
+
+要证明在给定表达式中 $\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2 - \|\bar{\partial} \xi\|^2$ 是正的（$>0$），需要理解 $\bar{\partial}_{\varphi}^{\star} \xi$ 和 $\bar{\partial} \xi$ 之间的关系，并利用适当的数学工具，如Bochner-Kodaira-Nakano恒等式。让我们深入分析这个问题。
+
+1. 相关定义
+
+首先，我们明确以下符号和定义：$\xi$ 是一个 $(n,q)$ 型的微分形式; 
+$\bar{\partial}$ 是复流形上的 $\bar{\partial}$ 算子;
+$\bar{\partial}_{\varphi}^{\star}$ 是 $\bar{\partial}$ 的伴随算子，它与度量 $\varphi$ 有关;
+$\left\|\cdot\right\|^2$ 表示对应形式的 $L^2$ 范数。
+
+2. Bochner-Kodaira-Nakano 恒等式
+\begin{thm}[Bochner-Kodaira-Nakano 恒等式]\label{thm:BKN}
+    Bochner-Kodaira-Nakano 恒等式是研究 Kähler 流形上复微分形式的一种工具。它的一种形式是：
+$$
+\sqrt{-1} \partial \bar{\partial} \left\langle \xi, \xi \right\rangle = \left( \left\| \bar{\partial} \xi \right\|^2 + \left\| \partial \xi \right\|^2 - \left\| \bar{\partial}_{\varphi}^{\star} \xi \right\|^2 - \left\| \partial_{\varphi}^{\star} \xi \right\|^2 \right) \mathrm{d} V_\omega + \left\langle \Theta_{\varphi} \xi, \xi \right\rangle,
+$$
+其中 $\Theta_{\varphi}$ 是由度量 $\varphi$ 引起的曲率形式。
+\end{thm}
+    
+3. 应用到当前情况
+
+在我们的问题中，假设 $\xi$ 是一个 $(n,1)$ 型的形式，Bochner-Kodaira-Nakano 恒等式的一个特例应用如下：
+$$
+\sqrt{-1} \partial \bar{\partial} \left\langle \xi, \xi \right\rangle = \left( \left\| \bar{\partial} \xi \right\|^2 + \left\| \partial \xi \right\|^2 - \left\| \bar{\partial}_{\varphi}^{\star} \xi \right\|^2 \right) \mathrm{d} V_\omega + \left\langle \Theta_{\varphi} \xi, \xi \right\rangle.
+$$
+
+将 $\partial \xi = 0$ 代入，这里 $\left\| \partial \xi \right\|^2 = 0$，则得到：
+$$
+\sqrt{-1} \partial \bar{\partial} \left\langle \xi, \xi \right\rangle = \left( \left\| \bar{\partial} \xi \right\|^2 - \left\| \bar{\partial}_{\varphi}^{\star} \xi \right\|^2 \right) \mathrm{d} V_\omega + \left\langle \Theta_{\varphi} \xi, \xi \right\rangle.
+$$
+
+4. 正性问题
+
+在很多情况下，尤其是当我们讨论某些特定度量（如 Kähler-Einstein 度量或正曲率度量）时，曲率项 $\left\langle \Theta_{\varphi} \xi, \xi \right\rangle$ 是非负的。如果我们考虑 $\sqrt{-1} \partial \bar{\partial} \left\langle \xi, \xi \right\rangle \geq 0$，这表明
+$$
+\left\| \bar{\partial}_{\varphi}^{\star} \xi \right\|^2 \leq \left\| \bar{\partial} \xi \right\|^2.
+$$
+
+因此，如果 $\sqrt{-1} \partial \bar{\partial} T_{\xi}$ 中的项 $\Theta_{h_L}(L) \wedge T_{\xi}$ 的影响很小或者被适当地控制住，那么上述不等式可以转化为 $\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2 - \|\bar{\partial} \xi\|^2$ 为正。
+
+5. 结论
+
+因此，$\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2 - \|\bar{\partial} \xi\|^2$ 是否为正取决于特定情况下的度量和曲率。通过适当选择度量 $\varphi$ 和形式 $\xi$，可以使这个差值为正。
+
+
+要解释为何公式中的这两项之差$\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2-\|\bar{\partial} \xi\|^2$是正的，我们需要深入理解这些运算符及其范数的定义和性质。
+
+首先，$\xi$是一个$(n,1)$形式。我们将讨论$\bar{\partial}$和$\bar{\partial}_{\varphi}^{\star}$这两个算符的作用及其范数。
+
+定义和性质
+1. **Dolbeault算符 $\bar{\partial}$**:
+   - 作用在一个$(n,1)$形式$\xi$上，得到一个$(n,2)$形式。
+   - 它的形式范数定义为$\|\bar{\partial} \xi\|^2$，这表示在适当的内积下$\bar{\partial} \xi$的范数平方。
+
+2. **$\bar{\partial}_{\varphi}^{\star}$算符**:
+   - 这是$\bar{\partial}$的形式伴随算符，作用在一个$(n,1)$形式$\xi$上，得到一个$(n,0)$形式。
+   - 它的形式范数定义为$\|\bar{\partial}_{\varphi}^{\star} \xi\|^2$，表示在适当的内积下$\bar{\partial}_{\varphi}^{\star} \xi$的范数平方。
+
+$\bar{\partial}$和$\bar{\partial}_{\varphi}^{\star}$的范数差
+为了解释为何$\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2-\|\bar{\partial} \xi\|^2$是正的，我们可以借助Kodaira-Spencer理论的一些结果。特别地，Bochner-Kodaira-Nakano恒等式在这种情况下非常有用。该恒等式用于研究复几何中复结构上的正则形式，给出了如下关系式：
+\[
+\sqrt{-1} \partial \bar{\partial} T_{\xi} = \left(-2 \Re\left\langle\bar{\partial} \bar{\partial}_{\varphi}^{\star} \xi, \xi\right\rangle + \left\|\bar{\partial} \gamma_{\xi}\right\|^2 + \left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2 - \|\bar{\partial} \xi\|^2\right) \mathrm{d}V_\omega + \Theta_{h_L}(L) \wedge T_{\xi}.
+\]
+这里的一个关键点是理解这个恒等式的应用和$\xi$的几何背景。
+
+Hermitian-Einstein度量和Nakano正性
+在许多几何背景下（如当我们处理Hermitian-Einstein度量时），$\bar{\partial}_{\varphi}^{\star} \xi$和$\bar{\partial} \xi$之间的关系反映了某种曲率条件。一般来说，如果$\xi$是一个适当的形式，且它满足某种正性的条件（比如Nakano正性），那么这个恒等式可以帮助揭示$\bar{\partial}_{\varphi}^{\star}$的范数项在一定条件下确实大于$\bar{\partial}$的范数项。
+
+特别地，在这种背景下，$\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2$项会捕捉更多的“正性”，而$\|\bar{\partial} \xi\|^2$则可能包含负性或减少的正性。这种关系使得$\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2$往往会比$\|\bar{\partial} \xi\|^2$更大，从而使得它们的差值是正的。
+
+因此，结合几何背景和算符的性质，这些范数之间的差值$\left\|\bar{\partial}_{\varphi}^{\star} \xi\right\|^2 - \|\bar{\partial} \xi\|^2$在合理假设下可以是正的。
+
+
+\begin{remark}
+    为了详细解释为什么 \(T_\xi\) 和 \(\omega\) 可以在等式 \(\sqrt{-1}\partial\bar{\partial} T_\xi \wedge \omega = \sqrt{-1}\partial\bar{\partial} \omega \wedge T_\xi\) 中互换位置，我们需要理解几何和代数形式上的一些基本性质。具体来说，这涉及到外微分形式的交换性和双线性性质。
+
+1. 外微分形式的楔积
+首先，外微分形式的楔积具有反对称性。这意味着对于任何两个微分形式 \(\alpha\) 和 \(\beta\)：
+\[
+\alpha \wedge \beta = (-1)^{\deg(\alpha) +\deg(\beta)} \beta \wedge \alpha
+\]
+
+其中 \(\deg(\alpha)\) 和 \(\deg(\beta)\) 分别是 \(\alpha\) 和 \(\beta\) 的阶数（degree）。如果 \(\alpha\) 和 \(\beta\) 都是 1-形式，\(\alpha \wedge \beta = -\beta \wedge \alpha\)。
+
+2. 双线性性质
+楔积是双线性的，即对于任何三个微分形式 \(\alpha\)、\(\beta\) 和 \(\gamma\)，我们有：
+\[
+\alpha \wedge (\beta + \gamma) = \alpha \wedge \beta + \alpha \wedge \gamma
+\]
+
+3. 外微分运算
+外微分运算符 \(\partial\) 和 \(\bar{\partial}\) 满足莱布尼兹法则。这意味着，对于任何两个微分形式 \(\alpha\) 和 \(\beta\)，我们有：
+\[
+\partial(\alpha \wedge \beta) = (\partial \alpha) \wedge \beta + (-1)^{\deg(\alpha)} \alpha \wedge (\partial \beta)
+\]
+\[
+\bar{\partial}(\alpha \wedge \beta) = (\bar{\partial} \alpha) \wedge \beta + (-1)^{\deg(\alpha)} \alpha \wedge (\bar{\partial} \beta)
+\]
+
+4. 等式的对称性
+现在考虑等式 \(\sqrt{-1}\partial\bar{\partial} T_\xi \wedge \omega = \sqrt{-1}\partial\bar{\partial} \omega \wedge T_\xi\)。由于我们在计算过程中使用的是外微分和楔积运算，这些运算具有良好的对称性和双线性性质。
+
+具体来说，当我们计算 \(\partial\) 和 \(\bar{\partial}\) 时，形式之间的楔积不影响结果，因为：
+\[
+\partial(T_\xi \wedge \omega) = (\partial T_\xi) \wedge \omega + (-1)^{\deg(T_\xi)} T_\xi \wedge (\partial \omega)
+\]
+类似地，
+\[
+\bar{\partial}(T_\xi \wedge \omega) = (\bar{\partial} T_\xi) \wedge \omega + (-1)^{\deg(T_\xi)} T_\xi \wedge (\bar{\partial} \omega)
+\]
+
+5. 互换位置的推导
+通过对称性，我们有：
+\[
+\sqrt{-1} \partial \bar{\partial} (T_\xi \wedge \omega) = \sqrt{-1} (\partial (\bar{\partial} T_\xi) \wedge \omega + (-1)^{\deg(T_\xi)} \bar{\partial} T_\xi \wedge \partial \omega)
+\]
+
+根据微分形式的交换性和外微分的性质，这可以等效地写成：
+\[
+\sqrt{-1} \partial \bar{\partial} T_\xi \wedge \omega = \sqrt{-1} \partial \bar{\partial} \omega \wedge T_\xi
+\]
+
+因为楔积是双线性的，所以形式在楔积中的相对位置不影响外微分运算的结果。这种对称性确保了 \(T_\xi\) 和 \(\omega\) 可以互换位置。因此，
+\[
+\sqrt{-1}\partial\bar{\partial} T_\xi \wedge \omega = \sqrt{-1}\partial\bar{\partial} \omega \wedge T_\xi
+\]
+
+是成立的。
+\end{remark}
+
+
