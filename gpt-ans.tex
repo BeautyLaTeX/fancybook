@@ -1,0 +1,406 @@
+\documentclass[lang=cn,zihao=-4,fontset=none,twoside]{fancybook}
+\usepackage{zhlipsum}
+\usepackage{amssymb}
+\let\heavymath\relax
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+\let\sum\relax
+\let\prod\relax
+\DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}
+\DeclareMathSymbol{\prod}{\mathop}{CMlargesymbols}{"51}
+%% \infty
+\DeclareSymbolFont{symbolsCM}{OMS}{cmsy}{m}{n}
+\SetSymbolFont{symbolsCM}{bold}{OMS}{cmsy}{b}{n}
+
+\DeclareMathSymbol{\infty}{\mathord}{symbolsCM}{"31}
+\let\dbar\relax
+\DeclareMathOperator*{\res}{Res}
+\newcommand{\pr}{^\prime}
+\newcommand{\prr}{^{\prime\prime}}
+\newcommand{\bd}{\partial}
+\newcommand{\bdd}{\bar\partial}
+\newcommand{\Dif}[2][]{\frac{\dd #1}{\dd #2}}
+\newcommand{\Diff}[2][]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dbar}{\bar\partial}
+\newcommand{\supp}{\operatorname{Supp}}
+\newcommand{\pa}{\partial}
+\newcommand{\ov}{\overline}
+\newcommand{\xu}{\sqrt{-1}}
+\newcommand{\lang}[1]{\langle #1\rangle}
+\newcommand{\itbf}[1]{\textit{\textbf{#1}}}
+% 定义紧密双内积符号
+\newcommand{\llangle}{\left\langle\!\left\langle}
+\newcommand{\rrangle}{\right\rangle\!\right\rangle}
+\usepackage{booktabs}
+\usepackage{shadowtext}\shadowoffset{.65pt}
+\newcommand{\Line}{\noindent\tikz\draw[line width=0.65pt,gray!80,dashed] (0,0)--++(.99\linewidth,0);\par}
+\newenvironment{note}[1][\bf Note:]{\par\Line\uuline{#1} }{\par\Line}
+
+
+
+
+\usetikzlibrary{patterns,shapes.geometric,3d,shadings,shadows} % 加载必要库
+
+% 定义金色颜色
+\definecolor{gold}{RGB}{255,215,0}
+\definecolor{parchment}{RGB}{245,245,220} % 定义淡黄色背景
+\definecolor{deepgold}{HTML}{e7ded5}
+% 定义交叉网格模式
+\pgfdeclarepatternformonly{customgrid}
+{\pgfpointorigin}
+{\pgfpoint{3pt}{3pt}}
+{\pgfpoint{3pt}{3pt}}
+{
+    \pgfsetlinewidth{0.3pt}
+    \pgfpathmoveto{\pgfpoint{0pt}{0pt}}
+    \pgfpathlineto{\pgfpoint{3pt}{3pt}}
+    \pgfpathmoveto{\pgfpoint{0pt}{3pt}}
+    \pgfpathlineto{\pgfpoint{3pt}{0pt}}
+    \pgfusepath{stroke}
+}
+
+\pgfdeclarelayer{background} %背景%底层
+\pgfdeclarelayer{foreground} %上层
+\pgfdeclarelayer{top} %顶部
+\pgfdeclarelayer{bottom} %底部
+\pgfsetlayers{bottom,background,main,foreground,top}
+
+\makeatletter
+% ---------------------------------------------------------------------------------- %
+% /* ---------------------------------- 第二种定理 --------------------------------- */
+\newtcolorbox{test}{
+	breakable,
+	enhanced,
+	sharp corners,
+	boxsep=1pt,
+	top=1ex,
+	boxrule=0pt,
+	colframe=deepgold,
+	colback=deepgold!20!white,
+	overlay unbroken and first={
+		\my@theorem@overlay@unbroken{gray}
+}}
+
+%%  Overlay Settings
+\newcommand{\my@theorem@overlay@unbroken}[1]{
+% 左侧圆柱体
+\node[cylinder, 
+draw=#1, 
+cylinder uses custom fill,
+cylinder body fill=parchment, 
+cylinder end fill=parchment!70,
+minimum width=0.5cm, % 更窄的圆柱体宽度
+minimum height=8cm,
+shape border rotate=90, % 调整方向
+anchor=center,drop shadow={opacity=0.3,shadow xshift=0.3mm,shadow yshift=-0.5mm},] (left) at ([yshift=-3cm]frame.north west) {};
+
+% 左侧圆柱体花纹
+\begin{scope}
+  \clip ([shift={(-0.25,0)}]frame.north west) rectangle  +(0.5,0); % 更窄的花纹范围
+  \fill[pattern=customgrid, pattern color=gray!40] ([shift={(-0.25,0)}]frame.north west) rectangle  +(0.5,0);
+\end{scope}
+
+% 右侧圆柱体
+\node[cylinder, 
+draw=gray, 
+cylinder uses custom fill,
+cylinder body fill=parchment, 
+cylinder end fill=parchment!70,
+minimum width=0.5cm, % 更窄的圆柱体宽度
+minimum height=6cm,
+shape border rotate=90, % 调整方向
+anchor=center,drop shadow={opacity=0.3,shadow xshift=-0.3mm,shadow yshift=-0.5mm},] (right) at (frame.north east) {};
+
+% 右侧圆柱体花纹
+\begin{scope}
+  \clip ([shift={(0.25,0)}]frame.north east) rectangle  +(-0.5,0); % 更窄的花纹范围
+  \fill[pattern=customgrid, pattern color=gray!40] ([shift={(0.25,0)}]frame.north east) rectangle  +(-0.5,0);
+\end{scope}
+
+
+% 左侧金属球（上下两个，与圆柱体贴合）
+\begin{pgfonlayer}{bottom}
+\shade[ball color=gold] (frame.north west) circle (0.3); % 更大的金属球
+\end{pgfonlayer}
+%  \begin{pgfonlayer}{foreground}
+\shade[ball color=gold] (frame.south west) circle (0.3);
+% \end{pgfonlayer}
+
+
+% 右侧金属球（上下两个，与圆柱体贴合）
+\begin{pgfonlayer}{bottom}
+\shade[ball color=gold] (frame.north east) circle (0.3); % 更大的金属球
+\end{pgfonlayer}
+\shade[ball color=gold] (frame.south east) circle (0.3);
+
+}
+% \newcommand{\my@theorem@overlay@first}[2]{
+
+% }
+% \newcommand{\my@theorem@overlay@last}[1]{
+
+% }
+
+
+\makeatother
+
+\begin{document}
+\thispagestyle{empty}
+\title{课题调研与选题探讨}
+\subtitle{上同调学习笔记}
+\edition{第一版}
+\bookseries{课\hspace{.5em}题\hspace{.5em}调\hspace{.5em}研}
+\author{Shilong.Lu}
+\pressname{Springer} %出版社名称
+\presslogo{figures/Springer-logo.png} %出版社徽标
+\makecover
+\input{frontmatter/titlepage}
+\frontmatter
+\pagenumbering{Roman}
+\input{frontmatter/preface}
+\thispagestyle{empty}
+\definecolor{maincolor}{HTML}{8B8989}
+\tableofcontents\let\cleardoublepage\clearpage
+
+\mainmatter
+\pagenumbering{arabic}
+\partimage{figures/flower.png}
+\partabstract{}
+\part{Blow-up 与Dolbeault 上同调学习笔记}
+\chapter{问题与回答集锦}
+\section{一些问答合集}
+\subsection{问题与回答}
+\[
+b_1^q + b_2^q + \cdots + b_d^q = \frac{1}{2\pi \sqrt{-1}} \int_{|w|=r} \frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)} dw.
+\]
+
+这个公式的推导基于复变函数的 \textbf{留数定理}
+和解析函数的性质。下面逐步解释推导的过程：
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux80ccux666fux548cux76eeux6807}{%
+\subsubsection{背景和目标}\label{ux80ccux666fux548cux76eeux6807}}
+
+函数 \(f(z, w)\) 是 \(z, w\) 的复变量函数，在 \(w\) 上的零点（根）为
+\(b_1, b_2, \dots, b_d\)。目标是通过积分公式计算与这些零点相关的某些性质（例如零点的幂和等）。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux96f6ux70b9ux7684ux6027ux8d28ux548cux7559ux6570ux5b9aux7406}{%
+\subsubsection{1.
+零点的性质和留数定理}\label{ux96f6ux70b9ux7684ux6027ux8d28ux548cux7559ux6570ux5b9aux7406}}
+
+根据 \(f(z, w)\) 在 \(w\) 上的零点性质，假设
+\(w = b_1, b_2, \dots, b_d\) 是 \(f(z, w) = 0\) 在 \(w\)
+上的零点，且这些零点位于单位圆盘 \$ \textbar{}w\textbar{} \textless{} r
+\$ 内。
+
+\hypertarget{ux7559ux6570ux5b9aux7406ux7684ux5e94ux7528}{%
+\paragraph{留数定理的应用}\label{ux7559ux6570ux5b9aux7406ux7684ux5e94ux7528}}
+
+根据复分析，假设 \(f(z, w)\) 在 \(w\)
+上的零点为简单零点（重零点的情况需要调整权重），则积分：
+
+\[
+\frac{1}{2\pi \sqrt{-1}} \int_{|w|=r} \frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)} dw
+\]
+
+等于 \(w = b_1, b_2, \dots, b_d\) 处的留数之和。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux7559ux6570ux8ba1ux7b97ux4e0eux96f6ux70b9ux5c55ux5f00}{%
+\subsubsection{2.
+留数计算与零点展开}\label{ux7559ux6570ux8ba1ux7b97ux4e0eux96f6ux70b9ux5c55ux5f00}}
+
+\hypertarget{ux5355ux4e2aux96f6ux70b9ux7684ux8d21ux732e}{%
+\paragraph{单个零点的贡献}\label{ux5355ux4e2aux96f6ux70b9ux7684ux8d21ux732e}}
+
+对于 \(f(z, w)\) 在 \(w = b_i\) 的简单零点，可以写成：
+
+\[
+f(z, w) = (w - b_i) f'(z, b_i) + \text{高阶项} \quad \text{(忽略高阶项)}.
+\]
+
+因此，\(\frac{\partial f}{\partial w}(z, w)\) 在 \(w = b_i\) 近似为
+\(f'(z, b_i)\)，且积分中 \(w^q\) 项在零点处的贡献为：
+
+\[
+    \text{Residue at } w = b_i: \quad \frac{w^q}{f'(z, b_i)}.
+\]
+
+\hypertarget{ux6240ux6709ux96f6ux70b9ux7684ux8d21ux732e}{%
+\paragraph{所有零点的贡献}\label{ux6240ux6709ux96f6ux70b9ux7684ux8d21ux732e}}
+
+对所有零点 \(b_1, b_2, \dots, b_d\)，积分公式累加留数：
+
+\[
+\frac{1}{2\pi \sqrt{-1}} \int_{|w|=r} \frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)} dw = b_1^q + b_2^q + \cdots + b_d^q.
+\]
+
+这里 \(b_1^q + b_2^q + \cdots + b_d^q\) 是所有零点的 \(q\) 次幂的和。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux7ed3ux679cux89e3ux91ca}{%
+\subsubsection{3. 结果解释}\label{ux7ed3ux679cux89e3ux91ca}}
+
+公式中的积分与零点 \(b_1, b_2, \dots, b_d\)
+的关系直接来源于留数定理。通过这个积分形式，可以解析地计算出零点的 \(q\)
+次幂的和。这种方法在解析函数论和几何中非常有用。
+
+
+要推导你提出的公式：
+
+\[
+\sum_{j=1}^d b_j^q = \frac{1}{2\pi i} \int_{|w|=r} \frac{w^q \left(\frac{\partial f(z, w)}{\partial w}\right)}{f(z, w)} \, dw,
+\]
+
+
+
+
+
+\textbf{为何积分函数选择这种形式}，以及 \textbf{留数为何会变成
+\(b_i^q\)}。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux4e00ux4e3aux4f55ux79efux5206ux51fdux6570ux662f-fracwq-fracpartial-fpartial-wz-wfz-w}{%
+\subsubsection{\texorpdfstring{一、为何积分函数是
+\(\frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)}\)？}{一、为何积分函数是 \textbackslash{}frac\{w\^{}q \textbackslash{}frac\{\textbackslash{}partial f\}\{\textbackslash{}partial w\}(z, w)\}\{f(z, w)\}？}}\label{ux4e00ux4e3aux4f55ux79efux5206ux51fdux6570ux662f-fracwq-fracpartial-fpartial-wz-wfz-w}}
+
+首先回顾留数定理的基本思想：对于一个解析函数 \(f(w)\)，如果它在
+\(w = b_i\) 有一个 \textbf{简单零点}，那么其 \textbf{留数}
+可以由下式计算：
+
+\[
+\text{Residue at } w = b_i: \quad \text{Res}_{w = b_i}\left(\frac{g(w)}{f(w)}\right) = \frac{g(b_i)}{f'(b_i)},
+\]
+
+这里 \(g(w)\) 是另一个解析函数，且 \(f(b_i) = 0\) 是简单零点。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+在这个公式中，我们的目标是将零点 \(b_1, b_2, \dots, b_d\)
+的信息提取出来，并集中在积分形式中。
+
+\hypertarget{ux5173ux4e8eux79efux5206ux51fdux6570ux7684ux9009ux62e9}{%
+\paragraph{1.
+关于积分函数的选择}\label{ux5173ux4e8eux79efux5206ux51fdux6570ux7684ux9009ux62e9}}
+
+目标是通过积分公式构造出 \textbf{零点的 \(q\) 次幂和}，即
+\(b_1^q + b_2^q + \cdots + b_d^q\)。所以积分核 \(\frac{g(w)}{f(z, w)}\)
+中的 \(g(w)\) 应该选择成一个 \textbf{与零点 \(b_i\) 相关的函数}。
+
+为了提取零点的 \(q\) 次幂，选择 \(g(w) = w^q\)
+是一个自然的选择，因为零点 \(b_i\) 的贡献将是 \(w = b_i\) 处的 \(w^q\)
+值。
+
+\hypertarget{ux51fdux6570-fracpartial-fpartial-wz-w-ux7684ux5f15ux5165}{%
+\paragraph{\texorpdfstring{2. 函数
+\(\frac{\partial f}{\partial w}(z, w)\)
+的引入}{2. 函数 \textbackslash{}frac\{\textbackslash{}partial f\}\{\textbackslash{}partial w\}(z, w) 的引入}}\label{ux51fdux6570-fracpartial-fpartial-wz-w-ux7684ux5f15ux5165}}
+
+如果 \(f(z, w)\) 在 \(w = b_i\) 有一个零点，局部展开为：
+\[
+f(z, w) = (w - b_i) f'(z, b_i) + \text{高阶项}.
+\]
+
+这里假设 \(b_i\) 是 \textbf{简单零点}，因此零点处的导数不为零，即
+\(f'(z, b_i) \neq 0\)。
+
+对于留数计算，需要 \(\frac{\partial f}{\partial w}(z, w)\)
+出现在分子中，因为这样才能在积分中抵消 \(f(z, w)\) 在零点处的一阶行为
+\((w - b_i)\)：
+\[
+\frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)} \quad \text{在 } w = b_i \text{ 附近的主要贡献是：} \quad \frac{b_i^q}{f'(z, b_i)}.
+\]
+
+这使得留数的贡献只和零点的 \(q\) 次幂 \(b_i^q\) 相关。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux4e8cux4e3aux4f55ux7559ux6570ux53d8ux6210ux4e86-b_iq}{%
+\subsubsection{\texorpdfstring{二、为何留数变成了
+\(b_i^q\)？}{二、为何留数变成了 b\_i\^{}q？}}\label{ux4e8cux4e3aux4f55ux7559ux6570ux53d8ux6210ux4e86-b_iq}}
+
+\hypertarget{ux7559ux6570ux7684ux8ba1ux7b97}{%
+\paragraph{1. 留数的计算}\label{ux7559ux6570ux7684ux8ba1ux7b97}}
+
+在 \(w = b_i\) 附近，将 \(f(z, w)\) 局部展开为：
+\[
+f(z, w) \approx (w - b_i) f'(z, b_i),
+\]
+         
+代入积分核
+\(\frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)}\)，我们得：
+\[
+\frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)} \approx \frac{w^q f'(z, w)}{(w - b_i) f'(z, b_i)}.
+\]
+
+在 \(w = b_i\) 附近，\(f'(z, w) \approx f'(z, b_i)\)，所以进一步化简为：
+\[
+\frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)} \approx \frac{w^q}{w - b_i}.
+\]
+
+此时只剩下经典的 \textbf{留数积分形式}，即：
+\[
+\text{Res}_{w = b_i} \left(\frac{w^q}{w - b_i}\right) = b_i^q.
+\]
+
+\hypertarget{ux5168ux79efux5206ux7684ux7ed3ux679c}{%
+\paragraph{2. 全积分的结果}\label{ux5168ux79efux5206ux7684ux7ed3ux679c}}
+
+由于积分绕的是一个包含所有零点 \(b_1, b_2, \dots, b_d\) 的圈
+\(|w| = r\)，而积分中每个零点的贡献是它的留数之和，因此最终得到：
+\[
+\frac{1}{2\pi \sqrt{-1}} \int_{|w| = r} \frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)} dw = b_1^q + b_2^q + \cdots + b_d^q.
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux4e09ux603bux7ed3}{%
+\subsubsection{三、总结}\label{ux4e09ux603bux7ed3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{积分函数的形式}：选择
+  \(\frac{w^q \frac{\partial f}{\partial w}(z, w)}{f(z, w)}\)
+  是为了匹配留数的公式，同时提取零点的 \(q\) 次幂信息。
+\item
+  \textbf{留数为何是 \(b_i^q\)}：通过将 \(f(z, w)\)
+  在零点附近展开，积分核 \(\frac{w^q}{w - b_i}\) 的留数恰好是
+  \(b_i^q\)。
+\end{enumerate}
+
+
+
+  
+
+% \begin{test}
+%   \zhlipsum[1]
+% \end{test}
+  
+
+
+
+
+
+
+
+
+
+\normalem
+% \printbibliography[
+% heading=bibintoc,
+% title={参考文献}
+% ]
+% \printindex
+
+\ISBNcode{\EANisbn[ISBN=978-80-7340-097-2]} %
+\summary{这是收集了一些杂七杂八的资料的笔记。}
+\makebottomcover
+\end{document}

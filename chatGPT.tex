@@ -1,0 +1,65 @@
+\documentclass[lang=cn,zihao=-4,fontset=none,twoside]{fancybook}
+\newcommand{\pr}{^\prime}
+\newcommand{\prr}{^{\prime\prime}}
+\newcommand{\bd}{\partial}
+\newcommand{\bdd}{\bar\partial}
+\newcommand{\Dif}[2][]{\frac{\dd #1}{\dd #2}}
+\newcommand{\Diff}[2][]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dbar}{\overline{\partial}}
+\newcommand{\supp}{\operatorname{Supp}}
+\newcommand{\pa}{\partial}
+\newcommand{\ov}{\overline}
+\newcommand{\xu}{\sqrt{-1}}
+\newcommand{\lang}[1]{\langle #1\rangle}
+\newcommand{\itbf}[1]{\textit{\textbf{#1}}}
+% 定义紧密双内积符号
+\newcommand{\llangle}{\left\langle\!\left\langle}
+\newcommand{\rrangle}{\right\rangle\!\right\rangle}
+\usepackage{booktabs}
+\usepackage{shadowtext}\shadowoffset{.65pt}
+\newcommand{\Line}{\noindent\tikz\draw[line width=0.65pt,gray!80,dashed] (0,0)--++(.99\linewidth,0);\par}
+\newenvironment{note}[1][\bf Note:]{\par\Line\uuline{#1} }{\par\Line}
+
+
+
+\begin{document}
+\thispagestyle{empty}
+\title{课题调研与选题探讨}
+\subtitle{上同调学习笔记}
+\edition{第一版}
+\bookseries{课\hspace{.5em}题\hspace{.5em}调\hspace{.5em}研}
+\author{Shilong.Lu}
+\pressname{Springer} %出版社名称
+\presslogo{figures/Springer-logo.png} %出版社徽标
+\makecover
+\input{frontmatter/titlepage}
+\frontmatter
+\pagenumbering{Roman}
+\input{frontmatter/preface}
+\thispagestyle{empty}
+\definecolor{maincolor}{HTML}{8B8989}
+\tableofcontents\let\cleardoublepage\clearpage
+
+\mainmatter
+\pagenumbering{arabic}
+\partimage{figures/flower.png}
+\partabstract{}
+\part{Blow-up 与Dolbeault 上同调学习笔记}
+\input{maincontents/blowup}
+\input{maincontents/L2extensiontheorems}
+\input{maincontents/L2extension_on_snc_divisor}
+\input{maincontents/complex}
+
+
+
+\normalem
+\printbibliography[
+heading=bibintoc,
+title={参考文献}
+]
+\printindex
+
+\ISBNcode{\EANisbn[ISBN=978-80-7340-097-2]} %
+\summary{这是收集了一些杂七杂八的资料的笔记。}
+\makebottomcover
+\end{document}
